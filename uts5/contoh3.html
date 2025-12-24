@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Panel Scroll Full Layar</title>
+
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+body {
+  display: flex;
+}
+
+/* Panel utama */
+.panel {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #555;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  height: 50px;
+  background: #2c7be5;
+  flex-shrink: 0;
+}
+
+/* Area tengah */
+.middle {
+  flex: 1;
+  margin: 10px;
+  border: 1px solid #aaa;
+  display: flex;
+}
+
+/* Konten */
+.content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* SATU ITEM SAJA (tinggi besar supaya bisa discroll) */
+.item {
+  height: 1200px;
+  background: #eaeaea;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1200px;
+}
+
+/* Scrollbar */
+.scrollbar {
+  width: 16px;
+  margin-left: 6px;
+  background: #ddd;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* Thumb */
+.thumb {
+  width: 100%;
+  height: 80px;
+  background: #888;
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  touch-action: none;
+}
+
+/* Footer */
+.footer {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.footer button {
+  width: 70px;
+  height: 35px;
+  background: #2c7be5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+  <div class="header"></div>
+
+  <div class="middle">
+
+    <!-- Konten (1 item) -->
+    <div class="content">
+      <div class="content-inner" id="content">
+        <div class="item">ITEM</div>
+      </div>
+    </div>
+
+    <!-- Scrollbar -->
+    <div class="scrollbar" id="bar">
+      <div class="thumb" id="thumb"></div>
+    </div>
+
+  </div>
+
+  <!-- Tombol menetap -->
+  <div class="footer">
+    <button>A</button>
+    <button>B</button>
+    <button>C</button>
+  </div>
+
+</div>
+
+<script>
+const thumb = document.getElementById("thumb");
+const bar = document.getElementById("bar");
+const content = document.getElementById("content");
+const contentBox = document.querySelector(".content");
+
+let dragging = false;
+let startY = 0;
+let startTop = 0;
+let scrollRatio = 0;
+
+/* Update posisi berdasarkan rasio */
+function updateScroll() {
+  const maxTop = bar.clientHeight - thumb.clientHeight;
+  const maxScroll = content.scrollHeight - contentBox.clientHeight;
+
+  thumb.style.top = (scrollRatio * maxTop) + "px";
+  content.style.top = -(scrollRatio * maxScroll) + "px";
+}
+
+/* Drag thumb */
+function startDrag(y) {
+  dragging = true;
+  startY = y;
+  startTop = thumb.offsetTop;
+}
+
+function drag(y) {
+  if (!dragging) return;
+
+  const maxTop = bar.clientHeight - thumb.clientHeight;
+  let newTop = startTop + (y - startY);
+  newTop = Math.max(0, Math.min(maxTop, newTop));
+
+  scrollRatio = newTop / maxTop;
+  updateScroll();
+}
+
+function stopDrag() {
+  dragging = false;
+}
+
+/* Mouse */
+thumb.addEventListener("mousedown", e => startDrag(e.clientY));
+document.addEventListener("mousemove", e => drag(e.clientY));
+document.addEventListener("mouseup", stopDrag);
+
+/* Touch */
+thumb.addEventListener("touchstart", e => startDrag(e.touches[0].clientY));
+document.addEventListener("touchmove", e => drag(e.touches[0].clientY));
+document.addEventListener("touchend", stopDrag);
+
+/* Rotasi / resize HP */
+window.addEventListener("resize", () => {
+  setTimeout(updateScroll, 100);
+});
+</script>
+
+</body>
+</html>
