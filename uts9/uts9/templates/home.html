@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<a href="/">home</a>
+<a href="/login">login</a>
+
+<h1>Home</h1>
+
+<p>current user {{ current_user }}</p>
+
+<h2>Buat akun</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <p style="color: red">
+        {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form action="/register" method="post">
+    <input type="text" name="username" placeholder="username" required>
+    <input type="password" name="password" placeholder="password" required>
+
+    <select name="role">
+        <option value="dosen">Dosen</option>
+        <option value="mahasiswa">Mahasiswa</option>
+        <option value="admin">Admin</option>
+    </select>
+
+    <button type="submit">Buat</button>
+</form>
+
+<br>
+
+{% for u in users %}
+<p>
+    {{ u.id }} {{ u.username }} <b>{{ u.role }}</b>
+    <a href="/delete/{{ u.id }}">hapus</a>
+</p>
+{% endfor %}
+
+</body>
+</html>
