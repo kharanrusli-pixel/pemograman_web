@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2 class="text-3xl font-bold text-[#1a365d] mb-6">Pendidikan</h2>
+    <ul class="space-y-4">
+        {% for edu in profil.pendidikan %}
+        <li class="border-l-4 border-blue-500 pl-4">
+            <p class="font-bold">{{ edu.tahun }}</p>
+            <p class="text-gray-700">{{ edu.instansi }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

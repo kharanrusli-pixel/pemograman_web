@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="flex flex-col items-center">
+    <div class="w-48 h-48 rounded-full border-4 border-white shadow-xl overflow-hidden mb-6">
+        {# profil.foto_url mengambil nilai "foto_raja.png" dari dictionary 'data' di Python #}
+        <img src="{{ url_for('static', filename=profil.foto_url) }}" 
+             alt="{{ profil.nama }}" 
+             class="w-full h-full object-cover">
+    </div>
+
+    <h1 class="text-4xl font-bold text-[#1a365d]">{{ profil.nama }}</h1>
+    <p class="text-gray-500 italic text-xl mb-4">Backend Developer | Python</p>
+    <p>Biodata : saya mahasiswa unidayan (Universitas Dayanu Ikhsanuddin)</p>
+    
+    <div class="w-full border-t border-gray-200 my-4"></div>
+</div>
+{% endblock %}

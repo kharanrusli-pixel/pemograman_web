@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Portfolio</title>
+</head>
+<body class="bg-gray-100 antialiased">
+
+    <div class="flex flex-row-reverse min-h-screen">
+        
+        <nav class="w-64 bg-[#1a1a1a] text-white flex flex-col fixed right-0 h-full shadow-xl">
+            <div class="px-6 py-10">
+                <h2 class="text-2xl font-bold tracking-tight border-b border-gray-700 pb-4 text-left">Menu</h2>
+            </div>
+            
+            <ul class="flex flex-col flex-1">
+                <li>
+                    <a href="/" class="block pl-6 py-4 hover:bg-gray-800 border-r-4 border-blue-500 font-semibold text-left transition-all duration-200">
+                        Beranda
+                    </a>
+                </li>
+                <li>
+                    <a href="/tentang" class="block p-6 py-4 hover:bg-gray-800 border-r-4 border-transparent text-left transition-all duration-200 text-gray-400 hover:text-white">
+                        Tentang
+                    </a>
+                </li>
+                <li>
+                    <a href="/pendidikan" class="block pl-6 py-4 hover:bg-gray-800 border-r-4 border-transparent text-left transition-all duration-200 text-gray-400 hover:text-white">
+                        Pendidikan
+                    </a>
+                </li>
+                <li>
+                    <a href="/pengalaman" class="block pl-6 py-4 hover:bg-gray-800 border-r-4 border-transparent text-left transition-all duration-200 text-gray-400 hover:text-white">
+                        Pengalaman
+                    </a>
+                </li>
+                <li>
+                    <a href="/kontak" class="block pl-6 py-4 hover:bg-gray-800 border-r-4 border-transparent text-left transition-all duration-200 text-blue-400 font-bold">
+                        Kontak
+                    </a>
+                </li>
+            </ul>
+
+            <div class="p-6 text-xs text-gray-500 text-left">
+                &copy; 2024 Kharan Rusli
+            </div>
+        </nav>
+
+        <main class="flex-1 mr-64 p-12 bg-white min-h-screen">
+            <div class="max-w-4xl mx-auto">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
