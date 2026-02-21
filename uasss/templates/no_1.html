@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Box Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: flex-start;   
+            align-items: flex-start;      
+            height: 100vh;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: white;      
+            color: black;                 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            border-radius: 8px;
+            border: 2px solid black;      
+        }
+
+        /* Responsive: layar kecil */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .box {
+                width: 150px;
+                height: 150px;
+                border: 2px solid black;  
+            }
+
+            /* Membuat diagonal dengan margin-left bertahap */
+            .box:nth-child(1) {
+                background-color: red;
+                margin-left: 0px;
+            }
+
+            .box:nth-child(2) {
+                background-color: yellow;
+                margin-left: 200px;
+            }
+
+            .box:nth-child(3) {
+                background-color: green;
+                margin-left: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</body>
+</html>
